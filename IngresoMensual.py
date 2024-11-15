@@ -92,6 +92,16 @@ educacion_label = st.selectbox(
     options=list(educacion_options.keys())
 )
 
+#Opciones para Estado Civil
+civil_options = {
+    'Divorciado': 0, 'Casado': 1, 'Soltero': 2
+}
+
+civil_label = st.selectbox(
+    "Seleccione el Esatdo Civil", 
+    options=list(civil_options.keys())
+)
+
 #Opciones para Nivel de Trabajo
 job_options = {
     'Mid': 0, 'Entry': 1, 'Senior': 2
@@ -175,21 +185,23 @@ desercion_label = st.selectbox(
 # Crear un formulario para la entrada de datos del usuario
 input_data = {}
 
-input_data['Edad'] = st.number_input("Ingrese el valor de Edad", min_value=18.0, max_value=60.0, value=18.0)
+input_data['Edad'] = st.number_input("Ingrese el valor de Edad", min_value=18, max_value=60, value=18)
 input_data['Género'] = gender_options[gender_label]
-input_data['Antigüedad en la Empresa'] = st.number_input("Ingrese el valor de Antigüedad en la Empresa", min_value=0.0, max_value=43.0, value=0.0)
+input_data['Antigüedad en la Empresa'] = st.number_input("Ingrese el valor de Antigüedad en la Empresa", min_value=0, max_value=43, value=0)
 input_data['Rol de Trabajo'] = role_options[role_label]
 input_data['Balance Trabajo-Vida'] = balance_options[balance_label]
 input_data['Satisfacción del Trabajo'] = satisfaccion_options[satisfaccion_label]
 input_data['Desempeño'] = desempeno_options[desempeno_label]
-input_data['Número de Promociones'] = st.number_input("Ingrese el valor de Número de Promociones", min_value=0.0, max_value=4.0, value=0.0)
+input_data['Número de Promociones'] = st.number_input("Ingrese el valor de Número de Promociones", min_value=0, max_value=4, value=0)
 input_data['Horas Extras'] = overtime_options[overtime_label]
-input_data['Distancia a Casa'] = st.number_input("Ingrese el valor de Distancia a Casa", min_value=1.0, max_value=99.0, value=1.0)
+input_data['Distancia a Casa'] = st.number_input("Ingrese el valor de Distancia a Casa", min_value=1, max_value=99, value=1)
 input_data['Nivel de Educación'] = educacion_options[educacion_label]
-input_data['Número de Dependientes'] = st.number_input("Ingrese el valor de Número de Dependientes", min_value=0.0, max_value=6.0, value=0.0)
+input_data['Estado Civil'] = civil_options[civil_label]
+input_data['Número de Dependientes'] = st.number_input("Ingrese el valor de Número de Dependientes", min_value=0, max_value=6, value=0)
 input_data['Nivel de Trabajo'] = job_options[job_label]
 input_data['Tamaño de Empresa'] = tamano_options[tamano_label]
 input_data['Trabajo Remoto'] = remoto_options[remoto_label]
+input_data['Meses desde el último evento'] = st.number_input("Ingrese el valor de Meses desde el último evento", min_value=2, max_value=180, value=2)
 input_data['Oportunidades de Liderazgo'] = liderazgo_options[liderazgo_label]
 input_data['Oportunidades de Innovación'] = innovacion_options[innovacion_label]
 input_data['Reputación de la Empresa'] = reputacion_options[reputacion_label]
@@ -206,7 +218,7 @@ if st.button("Realizar Predicción"):
     prediction_normalized = model1.predict(input_data_normalized)
 
     # Desnormalizar la salida, si es necesario (por ejemplo, si predice un salario)
-    min_val, max_val = '1009', '19999' # Rango original usado en la normalización del entrenamiento
+    min_val, max_val = 1009, 19999 # Rango original usado en la normalización del entrenamiento
     prediction_original = prediction_normalized * (max_val - min_val) + min_val
 
     # Mostrar el resultado
