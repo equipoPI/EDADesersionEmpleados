@@ -185,41 +185,40 @@ desercion_label = st.selectbox(
 # Crear un formulario para la entrada de datos del usuario
 input_data = {}
 
-input_data['Edad'] = st.number_input("Ingrese el valor de Edad", min_value=18, max_value=60, value=18)
-input_data['Género'] = gender_options[gender_label]
-input_data['Antigüedad en la Empresa'] = st.number_input("Ingrese el valor de Antigüedad en la Empresa", min_value=0, max_value=43, value=0)
-input_data['Rol de Trabajo'] = role_options[role_label]
-input_data['Balance Trabajo-Vida'] = balance_options[balance_label]
-input_data['Satisfacción del Trabajo'] = satisfaccion_options[satisfaccion_label]
-input_data['Desempeño'] = desempeno_options[desempeno_label]
-input_data['Número de Promociones'] = st.number_input("Ingrese el valor de Número de Promociones", min_value=0, max_value=4, value=0)
-input_data['Horas Extras'] = overtime_options[overtime_label]
-input_data['Distancia a Casa'] = st.number_input("Ingrese el valor de Distancia a Casa", min_value=1, max_value=99, value=1)
-input_data['Nivel de Educación'] = educacion_options[educacion_label]
-input_data['Estado Civil'] = civil_options[civil_label]
-input_data['Número de Dependientes'] = st.number_input("Ingrese el valor de Número de Dependientes", min_value=0, max_value=6, value=0)
-input_data['Nivel de Trabajo'] = job_options[job_label]
-input_data['Tamaño de Empresa'] = tamano_options[tamano_label]
-input_data['Trabajo Remoto'] = remoto_options[remoto_label]
-input_data['Meses desde el último evento'] = st.number_input("Ingrese el valor de Meses desde el último evento", min_value=2, max_value=180, value=2)
-input_data['Oportunidades de Liderazgo'] = liderazgo_options[liderazgo_label]
-input_data['Oportunidades de Innovación'] = innovacion_options[innovacion_label]
-input_data['Reputación de la Empresa'] = reputacion_options[reputacion_label]
-input_data['Reconocimiento a Empleado'] = reconocimiento_options[reconocimiento_label]
-input_data['Deserción'] = desercion_options[desercion_label]
+input_data['Edad+norm'] = st.number_input("Ingrese el valor de Edad", min_value=18, max_value=60, value=18)
+input_data['Género+norm'] = gender_options[gender_label]
+input_data['Antigüedad en la Empresa+norm'] = st.number_input("Ingrese el valor de Antigüedad en la Empresa", min_value=0, max_value=43, value=0)
+input_data['Rol de Trabajo+norm'] = role_options[role_label]
+input_data['Balance Trabajo-Vida+norm'] = balance_options[balance_label]
+input_data['Satisfacción del Trabajo+norm'] = satisfaccion_options[satisfaccion_label]
+input_data['Desempeño+norm'] = desempeno_options[desempeno_label]
+input_data['Número de Promociones+norm'] = st.number_input("Ingrese el valor de Número de Promociones", min_value=0, max_value=4, value=0)
+input_data['Horas Extras+norm'] = overtime_options[overtime_label]
+input_data['Distancia a Casa+norm'] = st.number_input("Ingrese el valor de Distancia a Casa", min_value=1, max_value=99, value=1)
+input_data['Nivel de Educación+norm'] = educacion_options[educacion_label]
+input_data['Estado Civil+norm'] = civil_options[civil_label]
+input_data['Número de Dependientes+norm'] = st.number_input("Ingrese el valor de Número de Dependientes", min_value=0, max_value=6, value=0)
+input_data['Nivel de Trabajo+norm'] = job_options[job_label]
+input_data['Tamaño de Empresa+norm'] = tamano_options[tamano_label]
+input_data['Meses desde el último evento+norm'] = st.number_input("Ingrese el valor de Meses desde el último evento", min_value=2, max_value=180, value=2)
+input_data['Trabajo Remoto+norm'] = remoto_options[remoto_label]
+input_data['Oportunidades de Liderazgo+norm'] = liderazgo_options[liderazgo_label]
+input_data['Oportunidades de Innovación+norm'] = innovacion_options[innovacion_label]
+input_data['Reputación de la Empresa+norm'] = reputacion_options[reputacion_label]
+input_data['Reconocimiento a Empleado+norm'] = reconocimiento_options[reconocimiento_label]
+input_data['Deserción+norm'] = desercion_options[desercion_label]
 
 # Crear botón para realizar predicción
 if st.button("Realizar Predicción"):
     # Convertir los datos en un array o DataFrame de acuerdo al modelo
-    input_df = np.array([input_data])
-    scaler = MinMaxScaler()
-    input_data_normalized = scaler.transform(input_df)
+    input_df = pd.DataFrame([input_data])
     # Realizar la predicción
-    prediction_normalized = model1.predict(input_data_normalized)
+    prediction_normalized = model1.predict(input_df)
 
     # Desnormalizar la salida, si es necesario (por ejemplo, si predice un salario)
     min_val, max_val = 1009, 19999 # Rango original usado en la normalización del entrenamiento
     prediction_original = prediction_normalized * (max_val - min_val) + min_val
 
     # Mostrar el resultado
-    st.write("La predicción del Ingreso Mensual es:", prediction_original)
+    st.write(f"La predicción del Ingreso Mensual es: ${prediction_original[0]}")
+

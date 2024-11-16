@@ -189,8 +189,8 @@ input_data['Estado Civil'] = civil_options[civil_label]
 input_data['Número de Dependientes'] = st.number_input("Ingrese el valor de Número de Dependientes", min_value=0, max_value=6, value=0)
 input_data['Nivel de Trabajo'] = job_options[job_label]
 input_data['Tamaño de Empresa'] = tamano_options[tamano_label]
-input_data['Trabajo Remoto'] = remoto_options[remoto_label]
 input_data['Meses desde el último evento'] = st.number_input("Ingrese el valor de Meses desde el último evento", min_value=2, max_value=180, value=2)
+input_data['Trabajo Remoto'] = remoto_options[remoto_label]
 input_data['Oportunidades de Liderazgo'] = liderazgo_options[liderazgo_label]
 input_data['Oportunidades de Innovación'] = innovacion_options[innovacion_label]
 input_data['Reputación de la Empresa'] = reputacion_options[reputacion_label]
@@ -203,6 +203,16 @@ if st.button("Realizar Clasificación"):
     input_df = pd.DataFrame([input_data])
 
     prediction = model1.predict(input_df)
+    def final(valor):
+        if valor == 0:
+            return 'Bajo'
+        elif valor == 1:
+            return 'Medio'
+        elif valor == 2:
+            return 'Alto'
+        else:
+            return 'Muy Alto'
     
+    sentencia = final(prediction)
     # Mostrar el resultado
-    st.write("La satisfacción del empleado es:", prediction)
+    st.write("La satisfacción del empleado es:", sentencia)

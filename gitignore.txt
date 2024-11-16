@@ -1,2 +1,2 @@
-C:\General\Cuarto\2°do Cuatrimestre\Machine Learning\EDA\EDADesersionEmpleados\Cod_StreamLit\modelclasificacion.pkl
-C:\General\Cuarto\2°do Cuatrimestre\Machine Learning\EDA\EDADesersionEmpleados\Cod_StreamLit\modelprediccion.pkl
+Cod_StreamLit/modelclasificacion.pkl
+Cod_StreamLit/modelprediccion.pkl
