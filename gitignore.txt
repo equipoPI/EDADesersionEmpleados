@@ -1,2 +1,3 @@
-Cod_StreamLit/modelclasificacion.pkl
-Cod_StreamLit/modelprediccion.pkl
+Cod_StreamLit/modelos/modelclasificacion.pkl
+Cod_StreamLit/modelos/modelprediccion.pkl
+
