@@ -1,0 +1,1 @@
+Cod_StreamLit/modelos/*.plk filter=lfs diff=lfs merge=lfs -text
